@@ -1,0 +1,88 @@
+sure@sure:~/ceshi$ valgrind --leak-check=full ./edit
+==22631== Memcheck, a memory error detector
+==22631== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==22631== Using Valgrind-3.10.0.SVN and LibVEX; rerun with -h for copyright info
+==22631== Command: ./edit
+==22631== 
+
+---------------------- Begin Unit Test --------------------
+
+********************** Test_1 **********************
+
+Function Link_t LinkTable_new(void), initialize 6 elements:
+      KEY        VALUE
+      100        abc100
+      101        abc101
+      102        abc102
+      103        abc103
+      104        abc104
+      105        abc105
+
+********************** Test_2 ***********************
+
+Function int LinkTable_getLength(const Link_t oLink):
+Length
+6
+
+********************** Test_3 ***********************
+
+Function int Link_contains(const Link_t oLink, const char *pcKey):
+     "101" Exist!
+      "109" No Exist!
+
+**********************Test_4 ***********************
+
+Function int Link_put(Link_t oLink, const char *pcKey, const void *pvValue)
+Put key:"111" value:"abc111":
+      KEY        VALUE
+      100        abc100
+      101        abc101
+      102        abc102
+      103        abc103
+      104        abc104
+      105        abc105
+      111        abc111
+
+**********************Test_5 ***********************
+
+Function void *Link_get(const Link_t oLink, const char *pcKey):
+      KEY 104'S VALUE      abc104
+      KEY 112'S VALUE      (null)
+
+**********************Test_6 ***********************
+
+Function void *Link_replace(Link_t oLink, const char *pcKey, const void *pvValue)
+Replace key:"101" value:"cpp101":
+      KEY        VALUE
+      100        abc100
+      101        cpp101
+      102        abc102
+      103        abc103
+      104        abc104
+      105        abc105
+      111        abc111
+
+**********************Test_7 ***********************
+
+Function void *Link_remove(Link_t oLink, const char *pcKey)Remove key:"102":
+      KEY        VALUE
+      100        abc100
+      101        cpp101
+      103        abc103
+      104        abc104
+      105        abc105
+      111        abc111
+
+REMOVE "102"  Return NULL pointer !
+
+------------------------------ End Unit Test -------------
+==22631== 
+==22631== HEAP SUMMARY:
+==22631==     in use at exit: 0 bytes in 0 blocks
+==22631==   total heap usage: 7 allocs, 7 frees, 168 bytes allocated
+==22631== 
+==22631== All heap blocks were freed -- no leaks are possible
+==22631== 
+==22631== For counts of detected and suppressed errors, rerun with: -v
+==22631== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
